@@ -1,5 +1,10 @@
 from django.shortcuts import render
+from Drive_Calendar.Drive_EDD import Lista
 
+# ESTRUCTURAS DRIVE
+lista_usuario = Lista.ListaDoble()
+
+# FUNCIONES PARA MANEJAR EL REDIRECCIONAMIENTO ENTRE PAGINAS DRIVE
 def index(request):
 
     return render(request, 'index.html')
@@ -11,3 +16,22 @@ def LogInView(request):
 def Registro(request):
 
     return render(request, 'Registro.html')
+
+# FUNCIONES PARA MANEJAR EL INGRESO DE DATOS EN LAS ESRUCTURAS DESDE WEB DRIVE
+
+def registro_usuarios_web(request):
+    if request.method == "POST":
+        nombre = request.POST['email']
+        password = request.POST['password']
+        try:
+            lista_usuario.agrega_Lista(nombre, password)
+            cadena = lista_usuario.cadena_Dot()
+            print("-----------Registrando en DRIVE------------")
+            print("Usuario: "+nombre)
+            print("Password: "+password)
+            print("-----------Fin Registro DRIVE------------")
+        except Exception as inst:
+            print("Error en el registro en Drive en Views.Py")        
+    return render(request, 'pr.html',{'var': cadena})
+
+# FUNCIONES PARA MANEJAR EL INGRESO DE DATOS EN LAS ESTRUCTURAS DESDE ANDROID DRIVE

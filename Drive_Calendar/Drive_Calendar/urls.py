@@ -16,10 +16,21 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from Drive_Calendar import views as dv_v
+from Drive_Calendar import views_C as cv_v
 
 urlpatterns = [
-    url(r'^$', dv_v.index),
-    url(r'^Drive/LogIn', dv_v.LogInView),
-    url(r'^Drive/Registro', dv_v.Registro),
+    #--------RUTAS PARA DIRECCIONAMIENTO DE PAGINAS DRIVE---
+    url(r'^$', dv_v.index, name='index'),
+    url(r'^Drive/LogIn', dv_v.LogInView, name='Drive-logIn'),
+    url(r'^Drive/Registro', dv_v.Registro, name='Drive-registro'),
     url(r'^admin/', admin.site.urls),
+    #------RUTAS PARA METODOS DE ESTRUCTURAS DRIVE----------
+    url(r'^Drive/Registrar', dv_v.registro_usuarios_web, name='drive-reg'),
+
+    #/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/--/-/-/-/-/-/-/-/
+    #------RUTAS PARA DIRECCIONAMIENTO EN CALENDAR
+    url(r'^Calendar/LogIn', cv_v.log_In_view, name='Calendar-logIn'),
+    url(r'^Calendar/Registro', cv_v.reg_view, name='Calendar-registro' ),
+    #------RUTAS PARA METODOS DE ESTRUCTURAS EN CALENDAR
+    url(r'^Calendar/Registrar', cv_v.registro_usuarios, name='calendar-reg'),
 ]
