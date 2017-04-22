@@ -76,3 +76,19 @@ class ListaDoble:
                 break
         cadena = cadena + "}"
         return cadena
+    
+    def log_in_check(self, nombre, password):
+        aux = self.raiz
+        bandera = "False"
+        while aux is not None:
+            try:
+                if aux.usuario.nombre == nombre and aux.usuario.password == password:
+                    bandera = "True"
+                    break
+                if aux.siguiente is not None:
+                    aux = aux.siguiente
+                else:
+                    break
+            except Exception as inst:
+                print("Ocurrio un error al buscar... en Drive log_in_check")
+        return bandera

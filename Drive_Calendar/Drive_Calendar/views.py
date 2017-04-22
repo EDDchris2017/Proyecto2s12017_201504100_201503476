@@ -34,4 +34,21 @@ def registro_usuarios_web(request):
             print("Error en el registro en Drive en Views.Py")        
     return render(request, 'pr.html',{'var': cadena})
 
+def log_in_usuarios_web(request):
+    if request.method == 'POST':
+        nombre = request.POST['email']
+        password = request.POST['password']
+        salida = ""
+        try:
+            resp = lista_usuario.log_in_check(nombre, password)
+            if resp == "True":
+                salida = "Acceso Concedido a: "+nombre
+                print("--------------LOG IN CHECK-------------TRUE")
+            else:
+                salida = "Datos Incorrectos"
+                print("------------LOG IN CHECK --------FALSE")
+        except Exception as inst:
+            print("Error en el log in en Dirve en Views.py")
+    return render(request, 'pr.html',{'var':salida})
+
 # FUNCIONES PARA MANEJAR EL INGRESO DE DATOS EN LAS ESTRUCTURAS DESDE ANDROID DRIVE
